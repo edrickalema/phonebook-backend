@@ -1,7 +1,7 @@
 const app = require('./../app');
 const morgan =require('morgan')
 const personsData = require('./../persons');
-
+const PhoneBook = require('./../mongo')
 
  const getPeople = (req, res) => {
     try {
@@ -47,26 +47,13 @@ const personsData = require('./../persons');
     try {
 
        
-        const {name, number} = req.body;
-        
-        const nameExist = personsData.find(person => person.name === name);
-
-        if(nameExist) {
-            res.json({
-                status:"failed",
-                error:"Name Exists in the phonebook"
-            })
-        }
-         next()
-
-        if(number === "") {
-            res.json({
-                status:"failed",
-                error:"Number can't be empty"
-            })
-        }
        
-        const person = req.body;
+       
+        const person = new PhoneBook(req.body);
+
+        person.save().then(res => console.log(res))
+
+        const {name, number} = person;
 
         morgan.token('host', (req, res) => {
           return req.hostname + req.body
