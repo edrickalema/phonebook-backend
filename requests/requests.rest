@@ -2,8 +2,8 @@ POST http://localhost:5000/api/persons
 content-type: application/json
 
 {
-    "name": "Eddy",
-    "number": "536353663"
+    "name": "Alema Edrick",
+    "number": "7765452425"
 }
 
 ###
@@ -11,7 +11,7 @@ content-type: application/json
 GET http://localhost:5000/api/persons
 
 ###
-GET http://localhost:5000/api/persons/1
+GET http://localhost:5000/api/persons/655b25086eee68e551842615
 
 ###
-DELETE http://localhost:5000/api/persons/1
+DELETE http://localhost:5000/api/persons/655b25086eee68e551842615

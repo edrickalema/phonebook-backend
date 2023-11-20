@@ -1,11 +1,11 @@
 const app = require('./../app');
 const morgan =require('morgan')
 const personsData = require('./../persons');
-const PhoneBook = require('./../mongo')
+const PhoneBook = require('../models/phonebook')
 
- const getPeople = (req, res) => {
+ const getPeople = async (req, res) => {
     try {
-        const person = personsData;
+        const person = await PhoneBook.find({});
         res.json({
             status:'Success',
             person
@@ -16,40 +16,45 @@ const PhoneBook = require('./../mongo')
         })
     }
 }
- const deletePerson = (req, res) => {
+ const deletePerson = async (req, res) => {
         try {
-        const id = Number(req.params.id);
-        const person = personsData.filter(person => person.id === id);
+        const id = req.params.id;
+        const person = await PhoneBook.findByIdAndDelete(id);
 
         res.json({
-            status:'Success'
+            status:'Success',
+            person
         })
 
         } catch (error) {
             
         }
 }
- const getPerson = (req, res) => {
+ const getPerson = async (req, res, next) => {
         try {
-            const id = Number(req.params.id)
+            const id = req.params.id
   
-            const person = personsData.find(person => person.id === id);
-        
-            res.json({
-                status:"success",
-                person
-            })
-        } catch (error) {
-            
+            await PhoneBook.findById(id).then(person => {
+                if(person) {
+                    res.json({
+                        status:"success",
+                        person
+                    })
+                }else {
+                    res.status(404).end()
+                }
+            });
+        } catch(error) {
+            next(error)
         }
 }
- const createPerson = (req, res, next) => {
+ const createPerson = async  (req, res, next) => {
     try {
 
-       
-       
-       
-        const person = new PhoneBook(req.body);
+        const person = await new PhoneBook({
+            name:req.body.name,
+            number:req.body.number
+        });
 
         person.save().then(res => console.log(res))
 

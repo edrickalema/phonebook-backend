@@ -15,8 +15,5 @@ app.use(morgan('tiny'))
 app.use(express.static('dist'))
 
 
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-    console.log("App is running at port 5000")
-})
+module.exports = app;
 
