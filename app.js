@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-const phoneRouter = require('./routes/routes');
+const phoneRouter = require('./routes/routes')
 const cors = require('cors')
 
 const {homePage} = require('./controller/controller')
@@ -15,5 +15,5 @@ app.use(morgan('tiny'))
 app.use(express.static('dist'))
 
 
-module.exports = app;
+module.exports = app
 
