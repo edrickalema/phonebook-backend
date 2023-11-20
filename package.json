@@ -1,16 +1,14 @@
 {
   "name": "phonebook-backend",
   "version": "1.0.0",
-  "description": "Building backend of phonebook application",
-  "main": "app.js",
+  "description": "",
+  "main": "mongo.js",
   "scripts": {
-    "start": "node mongo.js",
-    "dev": "nodemon mongo.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "start": "node mongo.js",
+    "dev": "nodemon mongo.js"
   },
-  "author": "Alema",
+  "author": "alema edrick",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
